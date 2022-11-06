@@ -6,6 +6,7 @@ import "firebase/compat/auth";
 
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import { useEffect } from "react";
 
 firebase.initializeApp({
   apiKey: "AIzaSyAtiI9BhSUZ0G7Fxj_FM9tTxFTtWPGeWNg",
@@ -111,6 +112,10 @@ function ChatRoom() {
     setFormValue("");
     dummy.current && dummy.current.scrollIntoView({ behavior: "smooth" });
   };
+
+  useEffect(() => {
+    dummy.current && dummy.current.scrollIntoView({ behavior: "smooth" });
+  }, [query]);
 
   return (
     <div className="flex flex-col h-[80vh] w-full">
