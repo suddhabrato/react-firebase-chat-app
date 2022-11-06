@@ -23,17 +23,19 @@ const firestore = firebase.firestore();
 function App() {
   const [user] = useAuthState(auth);
   return (
-    <div className="container my-8 h-[100vh] w-full md:w-1/2 mx-auto bg-white dark:bg-gray-900">
-      <header className="flex mx-8 pt-4 justify-center items-center">
-        <h1 className="text-3xl text-white">⚛️🔥💬</h1>
-        <div className="ml-auto">
-          <SignOut />
-        </div>
-      </header>
-      <div className="border-b dark:border-gray-600 m-8"></div>
-      <section className="bg-white dark:bg-gray-900 flex items-center justify-center px-6 mx-auto h-[80vh]">
-        {user ? <ChatRoom /> : <SignIn />}
-      </section>
+    <div className="bg-white h-[100vh] dark:bg-gray-700 overflow-auto mx-auto">
+      <div className="my-[2.5vh] w-full md:w-2/3 mx-auto bg-white dark:bg-gray-900 rounded-lg">
+        <section className="flex flex-col items-center justify-center px-6 mx-auto">
+          <header className="flex w-full mx-8 pt-2 justify-center items-center">
+            <h1 className="text-3xl text-white">⚛️🔥💬 React Chat Room App</h1>
+            <div className="ml-auto">
+              <SignOut />
+            </div>
+          </header>
+          <div className="border-b dark:border-gray-600 m-4"></div>
+          {user ? <ChatRoom /> : <SignIn />}
+        </section>
+      </div>
     </div>
   );
 }
@@ -44,11 +46,11 @@ function SignIn() {
     auth.signInWithPopup(provider);
   };
   return (
-    <div className="flex items-center mt-6 -mx-2">
+    <div className="flex items-center h-[80vh]">
       <button
         type="button"
         onClick={signInWithGoogle}
-        className="flex items-center justify-center px-6 py-3 mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
+        className="flex items-center justify-center px-6 py-3 text-gray-600 transition-colors duration-300 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
       >
         <svg className="w-6 h-6 mx-2" viewBox="0 0 40 40">
           <path
@@ -111,8 +113,8 @@ function ChatRoom() {
   };
 
   return (
-    <div className="flex flex-col w-full h-[80vh] overflow-auto">
-      <main className="flex flex-col">
+    <div className="flex flex-col h-[80vh] w-full">
+      <main className="flex flex-col overflow-auto">
         {messages &&
           messages.map((message, ind) => (
             <ChatMessage key={ind} {...message} />
@@ -128,8 +130,8 @@ function ChatRoom() {
           onChange={(e) => {
             setFormValue(e.target.value);
           }}
-          className="px-4 py-2 w-full text-gray-700 bg-white border rounded-full sm:mx-2 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600"
-          placeholder="say something nice"
+          className="px-4 py-2 w-full text-gray-700 bg-white border rounded-3xl sm:mx-2 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600"
+          placeholder="Say something nice!"
         />
 
         <button
@@ -150,10 +152,10 @@ function ChatMessage({ text, uid, photoURL }) {
   return (
     <>
       {messageClass ? (
-        <div className="flex self-end justify-end m-2 w-full max-w-sm bg-white rounded-full shadow-md dark:bg-gray-800">
-          <div className="flex flex-wrap flex-row-reverse items-center px-4 py-3">
+        <div className="flex self-end justify-end m-2 w-full max-w-sm bg-white rounded-3xl shadow-md dark:bg-gray-800">
+          <div className="flex flex-row-reverse items-center px-4 py-3">
             <img
-              className="object-cover w-10 h-10 rounded-full"
+              className="object-cover w-10 h-10 rounded-full self-start"
               alt="User avatar"
               src={
                 photoURL ||
@@ -169,10 +171,10 @@ function ChatMessage({ text, uid, photoURL }) {
           </div>
         </div>
       ) : (
-        <div className="flex m-2 w-full max-w-sm bg-white rounded-full shadow-md dark:bg-gray-800">
+        <div className="flex m-2 min-w-auto max-w-sm bg-white rounded-3xl shadow-md dark:bg-gray-800">
           <div className="flex items-center px-4 py-3">
             <img
-              className="object-cover w-10 h-10 rounded-full"
+              className="object-cover w-10 h-10 rounded-full self-start"
               alt="User avatar"
               src={
                 photoURL ||
