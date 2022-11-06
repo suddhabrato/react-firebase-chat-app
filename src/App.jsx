@@ -157,7 +157,7 @@ function ChatMessage({ text, uid, photoURL }) {
   return (
     <>
       {messageClass ? (
-        <div className="flex self-end justify-end m-2 w-full max-w-sm bg-white rounded-3xl shadow-md dark:bg-gray-800">
+        <div className="flex self-end justify-end m-2 min-w-auto max-w-sm bg-white rounded-3xl shadow-md dark:bg-gray-800">
           <div className="flex flex-row-reverse items-center px-4 py-3">
             <img
               className="object-cover w-10 h-10 rounded-full self-start"
@@ -176,8 +176,8 @@ function ChatMessage({ text, uid, photoURL }) {
           </div>
         </div>
       ) : (
-        <div className="flex m-2 min-w-auto max-w-sm bg-white rounded-3xl shadow-md dark:bg-gray-800">
-          <div className="flex items-center px-4 py-3">
+        <div className="flex self-start m-2 min-w-auto max-w-sm bg-white rounded-3xl shadow-md dark:bg-gray-800">
+          <div className="flex flex-row items-center px-4 py-3">
             <img
               className="object-cover w-10 h-10 rounded-full self-start"
               alt="User avatar"
